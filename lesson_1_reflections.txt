@@ -1,12 +1,16 @@
 Komendy:
 git log - historia commitów
-git diff <IDCommit1> <IDCommit2> - zestawienie ró¿nic miêdzy dwoma commitami 
+git diff <IDCommit1> <IDCommit2> - zestawienie ró¿nic miêdzy dwoma commitami
+git diff - bez argumentów pokazuje ró¿nice pomiêdzy plikami w working directory i staging area (jeœli wszystkie poprzednie zmiany zosta³y scommitowane i nic nie zosta³o dodane do staging area to w staging area, , znajduj¹ siê tylko ostatnie wersje plików - to samo co w repozytorium scommitowanym)
+git diff --staged - pokazuje ró¿nice pomiêdzy plikami w staging area a repozytorium 
 git clone <URL> - œci¹gniêcie repository z ca³¹ histori¹ commitów
-git checkout - cofniêcie siê z kodem do innej wersji kodu (to nie to samo, co svn checkout)
+git checkout {numer commita}- cofniêcie siê z kodem do innej wersji kodu (to nie to samo, co svn checkout)
+git checkout master - wraca do ostatniej scommitowanej wersji w branchu master
 git init - tworzy repozytorium git w danym katalogu
 git status - zwraca status plików w bie¿¹cym katalogu - czy s¹ "tacked" przez git, czy s¹ w staging area, czy s¹ committed
 git add - adds files to staging area  
 git reset - usuwa plik dodany do staging area
+git reset --hard - usuwa wszelkie zmiany nie scommitowane ze staging area i bie¿¹cego katalogu (czy te¿ w plikach, które s¹ untracked?)
 git commit -m "Commit message"
 
 Git Errors and Warnings Solution
