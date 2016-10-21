@@ -1,17 +1,43 @@
 Komendy:
 git log - historia commitów
-git diff <IDCommit1> <IDCommit2> - zestawienie ró¿nic miêdzy dwoma commitami
+git log --graph --oneline {nazwa_ga³êzi} {nazwa_ga³êzi}
+git diff <IDCommit1 stary> <IDCommit2 nowy> - zestawienie ró¿nic miêdzy dwoma commitami
 git diff - bez argumentów pokazuje ró¿nice pomiêdzy plikami w working directory i staging area (jeœli wszystkie poprzednie zmiany zosta³y scommitowane i nic nie zosta³o dodane do staging area to w staging area, , znajduj¹ siê tylko ostatnie wersje plików - to samo co w repozytorium scommitowanym)
 git diff --staged - pokazuje ró¿nice pomiêdzy plikami w staging area a repozytorium 
 git clone <URL> - œci¹gniêcie repository z ca³¹ histori¹ commitów
 git checkout {numer commita}- cofniêcie siê z kodem do innej wersji kodu (to nie to samo, co svn checkout)
 git checkout master - wraca do ostatniej scommitowanej wersji w branchu master
+git checkout {nazwa_ga³êzi} - zmiana ga³êzi 
+git checkout -b new_branch_name - w przypadku gdy jest siê w "detached HEAD" state - mo¿na stworzyæ now¹ ga³¹Ÿ ta komenda jest równa dwóm - git branch new_branch_name i git checkout new_branch_name
 git init - tworzy repozytorium git w danym katalogu
 git status - zwraca status plików w bie¿¹cym katalogu - czy s¹ "tacked" przez git, czy s¹ w staging area, czy s¹ committed
 git add - adds files to staging area  
 git reset - usuwa plik dodany do staging area
-git reset --hard - usuwa wszelkie zmiany nie scommitowane ze staging area i bie¿¹cego katalogu (czy te¿ w plikach, które s¹ untracked?)
+git reset --hard - usuwa wszelkie zmiany nie scommitowane ze staging area i bie¿¹cego katalogu (czy te¿ w plikach, które s¹ untracked? - z empirii wynika, ¿e nie... ) UWAGA: TYCH ZMIAN NIE MO¯NA JU¯ COFN¥Æ
 git commit -m "Commit message"
+Ka¿dy commit ma swojego rodzica-commit - tak mo¿na poruszaæ siê po historii commitów dla danej ga³êzi - sama ga³¹Ÿ jej nie ma. tu pojawia siê koncepcja reachability i detached HEAD
+git branch - pokazuje w której ga³êzi jesteœ obecnie
+git branch {name} - tworzy now¹ ga³¹Ÿ kodu
+git branch -d branch_name
+git gc - git garbage collection - usunie wszystkie commity bez rodzica, czyli nieosi¹galne (unreacheable / reachability)
+
+Mergowanie kodu z dwóch ga³êzi:
+1. trzeba byæ na ga³êzi do której siê merguje (tak jak przy commit)
+2. git merge nazwa_ga³êzi_mergowanej - zawsze zmiany s¹ domergowywane do aktualnej ga³êzi na której siê jest, jeœli poda siê kilka ga³êzi, to wszystkie zostan¹ domergowane
+3. na koniec powinno siê usun¹æ nazwê domergowanej ga³êzi git branch -d nazwa_ga³êzi (jeœli chce siê usuwaæ t¹ ga³¹Ÿ...)
+Jeœli jest merge conflict to nale¿y samemu poprawiæ pliki nastepnie je dodaæ do staging area (git add) i skommitowaæ (git commit)
+
+git merge --abort - pozwala wycofaæ siê z merge (przynajmniej nieudanego)
+git show commitID - dzia³a jak diff pomiêdzy commitID a jego rodzicem 
+
+GitHub, czyli repozytorium w chmurze
+
+git remote - zwraca informacjê czy dane repo ma repo (jedno lub wiêcej) w necie, ka¿dy remote dla danego repo ma swoj¹ nazwê, najczêœciej origin. 
+git remote -v - zwraca jego adres
+git remote add [nazwa remote] [adres url] - dodaje remote do repozytorium
+
+
+
 
 Git Errors and Warnings Solution
 Should not be doing an octopus
@@ -24,3 +50,11 @@ Panic! (the 'impossible' happened)
 This is a real error message, but it’s not output by Git. Instead it’s output by GHC, the compiler for a programming language called Haskell. It’s reserved for particularly surprising errors!
 
 Takeaway We hope these errors and warnings amused you as much as they amused us! Now that you know what kind of errors Git can throw, you’re ready to start checking out previous versions of files with Caroline.
+
+Merge conflict (Newline characters between Windows and Unix systems)
+
+Context: Whenever we hit the "Enter" key on the keyboard, we are actually telling the computer to insert an invisible character into our text file to indicate to the computer that there should be a new line. Unix systems adds one character called the "line feed" character or LF or \n while Windows systems adds two characters, "carriage return" and "line feed" or CRLF or \r\n.
+
+Caroline's files have LF because her files were edited on Mac OSX, which uses LF. If a Windows user were to edit Caroline's files, the Windows text editor might convert all LF to CRLF to make editing files possible. When the Windows user merges her file with Caroline's files, a merge conflict will result due to the different LF and CRLF characters.
+
+To fix this, Windows users should set the global autocrlf attribute to true: git config --global core.autocrlf true. More information can be found here: https://help.github.com/articles/dealing-with-line-endings/#platform-all

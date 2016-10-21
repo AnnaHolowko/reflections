@@ -7,11 +7,14 @@ Nie wszystkie pliki z bieżącego katalogu trzeba dodawać do staging area. Do s
 
 How can you use the staging area to make sure you have one commit per logical
 change?
+Moge dodawać do staging area pojedyncze pliki, czyli zmiany w różnych plikach mogę podzielić na dwa commity. Moge też mieć inną wersję pliku w folderze bieżącym i inną w staging area.
 
 What are some situations when branches would be helpful in keeping your history
 organized? How would branches help?
+Gałęzie kodu pozwalają na stworzenie alternatywnej, równoległej wersji programu. Można eksperymentować w sposób bardziej kontrolowany, nie "niszcząc" działającej, aktualnej wersji, po przetestowaniu zmiany. można ją potem zmergować z główną gałęzią kodu.
 
 How do the diagrams help you visualize the branch structure?
+Diagramy pokazują rodzica dla każdego commitu, dla dwóch wybranych gałęzi. Komenda git log --graph --oneline nazwa_gałęzi1 nazwa_gałęzi2
 
 What is the result of merging two branches together? Why do we represent it in
 the diagram the way we do?
