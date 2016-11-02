@@ -32,10 +32,10 @@ git show commitID - dzia³a jak diff pomiêdzy commitID a jego rodzicem
 
 GitHub, czyli repozytorium w chmurze
 
-git remote - zwraca informacjê czy dane repo ma repo (jedno lub wiêcej) w necie, ka¿dy remote dla danego repo ma swoj¹ nazwê, najczêœciej origin. 
+git remote - zwraca informacjê czy dane repo ma remote (jedno lub wiêcej) w necie, ka¿dy remote dla danego repo ma swoj¹ nazwê, najczêœciej origin, remote zdefiniowany jest dla fetch (sk¹d) i dla push (dok¹d)
 git remote -v - zwraca jego adres
 git remote add [nazwa remote] [adres url] - dodaje remote do repozytorium
-
+git push [nazwa remote] [nazwa ga³êzi] - skomitowane zmiany dla danej ga³êzi przesy³ane s¹ do danego remote (origin)
 
 
 
